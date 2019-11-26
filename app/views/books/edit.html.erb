@@ -1,0 +1,37 @@
+<!-- 本の詳細編集画面 -->
+
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+ <% end %>
+
+<% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @book.errors.count %>件のerrorが発生しました。</h2>
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for(@book) do |f| %>
+
+ <h1>Editing Book</h1>
+
+ <p>title</p>
+
+    <%= f.text_field :title %>
+
+ <p>Opinion</p>
+
+    <%= f.text_field :body %>
+
+<%= f.submit  %>
+
+
+<% end %>
+
+<%= link_to 'show',book_path(@book.id) %>
+
+<%= link_to 'back',books_path %>

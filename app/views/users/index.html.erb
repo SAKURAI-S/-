@@ -1,0 +1,47 @@
+<!-- Users画面 -->
+
+<main class="cleafix">
+<div class="sidebar">
+
+<h2>User info</h2>
+
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback:"no_image.jpg" %>
+
+<p>name</p>
+
+<%= @user.name %>
+
+<p>introduction</p>
+
+<%= @user.introduction %>
+
+<%=link_to '', edit_user_path(current_user.id),class: "glyphicon glyphicon-wrench" %>
+
+<%= form_for (@book) do |f| %>
+<h2>New book</h2>
+
+    <%= f.text_field :title %>
+
+<h4>Opinion</h4>
+
+    <%= f.text_area :body %>
+
+<%=f.submit 'Create Book' %>
+
+<% end %>
+
+</div>
+<table class="table table-striped">
+<thead>
+  <tr>
+<h2>Users</h2>
+   <p>image</p>
+   <% @users.each do |user| %>
+   <tr>
+   <td><%= user.name %></td>
+   <td><%= user.id %></td>
+   <%= link_to 'Show',user_path(user.id) %>
+<% end %>
+</main>
+
+</table>

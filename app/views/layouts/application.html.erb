@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<table class="table table-striped">
+<div class="container">
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+   <header>
+  <div class="col-lg-12" style="background-color: black;">
+   <h2>Bookers</h2>
+   <% if user_signed_in? %>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-home" aria-hidden="true">
+        <%= link_to 'Home', user_path(current_user.id) %></span>
+      </li></div>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-user" aria-hidden="true">
+        <%= link_to 'Users', users_path %></span>
+      </li></div>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-book" aria-hidden="true">
+        <%= link_to 'Books',books_path %></span>
+      </li></div>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-log-out" aria-hidden="true">
+        <%= link_to 'Log out', destroy_user_session_path,method: :delete %></span>
+      </li></div>
+    <% else %>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-home" aria-hidden="true">
+        <%= link_to 'Home',root_path %></span>
+      </li></div>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-link" aria-hidden="true">
+        <%= link_to 'About',about_path%></span>
+      </li></div>
+      <div class="col"><li class=""><span class="glyphicon glyphicon-edit" aria-hidden="true">
+        <%= link_to 'Sign up', new_user_registration_path %></span>
+      </li>,/
+      <div class="col">li class=""><span class="glyphicon glyphicon-log-in" aria-hidden="true">
+        <%= link_to 'Log in', new_user_session_path %></span>
+      </li></div>
+    <% end %>
+    </header>
+
+    <%if flash[:notice]%>
+      <%= flash[:notice] %>
+    <% end %>
+  </body>
+</div>
+</div>
+</table>
+    <%= yield %>
+</body>
+<table class="table table-striped">
+     <footer>
+      <p>CopyRight Infratop.inc</p>
+      </footer>
+  </body>
+</html>
+</table>
