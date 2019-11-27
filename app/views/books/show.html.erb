@@ -12,72 +12,65 @@
       </ul>
     </div>
   <% end %>
-<table class="table table-striped">
-<div class="container">
-<div class="row">
-<div class="col-lg-4" >
-  <div class="col-lg-4">
-<h1>User info</h1>
 
-<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback:"no_image.jpg" %>
-
-<p>name</p>
-
-<%= @user.name %>
-
-<p>introduction</p>
-
-<%= @user.introduction %>
-
-
-<% if @a.user_id == current_user.id %>
-<%=link_to '', edit_user_path(current_user.id),class: "glyphicon glyphicon-wrench"  %>
-<% else %>
-<%=link_to '', user_path(current_user.id),class: "glyphicon glyphicon-wrench"  %>
-<% end %>
-
-<h2>New book</h2>
-<%= form_for (@book) do |f| %>
-    <%= f.text_field :title %>
-
-    <h4>Opinion</h4>
-    <%= f.text_area :body %>
-
-    <%=f.submit%>
-</div>
-<% end %>
-
-</div>
-
-<table class="table table-striped">
-  <div class="col-lg-8">
-  <h2>Books detail</h2>
-  <thead>
-      <tr>
-        <th>ユーザー名</th>
-
-        <th>Title</th>
-
-        <th>Opinion</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><%= link_to  user_path(@user) do%>
-            <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback:"no_image.jpg" %>
-            <%=@user.name%>
-          <%end%>
-        </td>
-        <td><%= @a.title %></td>
-        <td><%= @a.body %></td>
-      </tr>
-      <% if @user == current_user %>
-      <%= link_to 'Edit', edit_book_path(@a.id) %>
-
-      <%= link_to 'Destroy',book_path(@a.id),method: :delete %>
+<div class="col-xs-3">
+  <table class="table table-striped">
+  <h1>User info</h1>
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback:"no_image.jpg" %>
+  <tr>
+    <th>name</th>
+      <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>introduction</th>
+      <td><%= @user.introduction %></td>
+      <% if @a.user_id == current_user.id %>
+      <%=link_to '', edit_user_path(current_user.id),class: "glyphicon glyphicon-wrench"  %>
+      <% else %>
+      <%=link_to '', user_path(current_user.id),class: "glyphicon glyphicon-wrench"  %>
       <% end %>
- </tbody>
-</table>
+  </tr>
+  </table>
+
+  <%=link_to '', edit_user_path(@user.id),class: "glyphicon glyphicon-wrench" %>
+
+
+    <h2>New book</h2>
+    <%= form_for (@book) do |f| %>
+        <h4>Title</h4>
+        <%= f.text_field :title, class: "title_field" %>
+
+        <h4>Opinion</h4>
+        <%= f.text_area :body, class: "body_field"  %>
+
+        <%= f.submit 'Create Book',class: "btn btn-primary col-xs-12" %>
+    <% end %>
 </div>
-</table>
+
+<div class="col-xs-9">
+  <h2>Books detail</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ユーザー名</th>
+          <th>Title</th>
+          <th>Opinion</th>
+        </tr>
+    </thead>
+
+      <tbody>
+          <tr>
+            <th><%= link_to  user_path(@user) do %>
+                <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback:"no_image.jpg" %><br><%= @user.name %>
+              <%end%>
+              </th>
+            <th><%= @a.title %></th>
+            <th><%= @a.body %></th>
+          <% if @user == current_user %>
+            <th><%= link_to 'Edit', edit_book_path(@a.id) %></th>
+            <th><%= link_to 'Destroy',book_path(@a.id),method: :delete %></th>
+          <% end %>
+        </tr>
+     </tbody>
+    </table>
 </div>
